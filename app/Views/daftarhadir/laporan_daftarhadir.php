@@ -30,7 +30,7 @@
 <script>
     function ViewLaporan() {
         let start_date = $('#start_date').val();
-        
+
         if (start_date === "") {
             Swal.fire({
                 title: "Tanggal belum lengkap!",
@@ -44,13 +44,10 @@
             type: "POST",
             url: "<?= base_url('DaftarHadir/ViewLaporanDaftarHadir') ?>",
             data: {
-                start_date: start_date,
-                end_date: end_date
+                start_date: start_date
             },
             dataType: "JSON",
             success: function(response) {
-                console.log(response); // Debugging: cek respons server
-
                 if (response.status === 'success') {
                     $('.Tabel').html(response.data);
                 } else {
@@ -60,14 +57,21 @@
                         showConfirmButton: true
                     });
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error(error); // Menangkap kesalahan AJAX
+                Swal.fire({
+                    title: "Gagal mengambil data!",
+                    text: "Terjadi kesalahan pada server.",
+                    icon: "error",
+                    showConfirmButton: true
+                });
             }
         });
     }
 
-
     function PrintLaporan() {
         let start_date = $('#start_date').val();
-        
 
         if (start_date === "") {
             Swal.fire({
@@ -78,7 +82,7 @@
             return;
         }
 
-        window.open('<?= base_url('DaftarHadir/PrintLaporanDaftarHadir') ?>/' + start_date + '/' + end_date, '_blank');
+        window.open('<?= base_url('DaftarHadir/PrintLaporanDaftarHadir') ?>/' + start_date, '_blank');
     }
 </script>
 <?= $this->endSection() ?>

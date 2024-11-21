@@ -7,8 +7,7 @@
             <h3 class="card-title"><?= $subjudul ?></h3>
 
             <div class="card-tools">
-                <button type="button" onclick="window.open('<?= base_url('TandaTerima/ExportPDF') ?>', 'PrintWindow', 'toolbar=yes,width=800,height=600')" class="btn btn-tool"><i class="fas fa-print"></i> Print</button>
-                <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#add-data"><i class="fas fa-plus"></i> Add Data</button>
+                <button type="button" onclick="NewWin=window.open('<?= base_url('TandaTerima/PrintTandaTerima/' . $tanggal_awal . '/' . $tanggal_akhir) ?>','NewWin','toolbar = yes')" class="btn btn-tool"><i class="fas fa-print"> Print</i> <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#add-data"><i class="fas fa-plus"></i> Add Data</button>
             </div>
 
 
@@ -53,39 +52,47 @@
 
 <!-- Bagian tanda tangan di bawah tabel -->
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-md-12 text-right">
-            <p>Batang, Januari 2024</p>
-            <p><b>BENDAHARA PENGELUARAN,</b></p>
-        </div>
-    </div>
-
-    <div class="row mt-4">
-        <div class="col-md-4 text-left">
-            <p>PPTK,</p>
-            <p><a href="#" class="text-decoration-none">Siti Purwanti, S.E., M.Acc.</a></p>
-            <p>NIP. 19810518 200501 2 015</p>
-        </div>
-
-        <div class="col-md-4 text-center">
-            <p>INSPEKTUR DAERAH</p>
-            <p>KABUPATEN BATANG,</p>
-        </div>
-
-        <div class="col-md-4 text-right">
-            <p><a href="#" class="text-decoration-none">Isyana Noviana Fasa, A.Md.</a></p>
-            <p>NIP. 19851128 202012 2 002</p>
-        </div>
-    </div>
-
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-md-12 text-center">
-            <p><b>Dr. Bambang Supriyanto, SH.M.Hum, CGCAE</b></p>
-            <p>Pembina Utama Muda</p>
-            <p>NIP. 19641214 198603 1 009</p>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>PPTK,</p>
+                        <br>
+                        <br>
+                        <br>
+                        <p><u>Siti Purwanti, S.E., M.Acc.</u></p>
+                        <p>NIP. 19810518 200501 2 015</p>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <p>INSPEKTUR DAERAH</p>
+                        <p>KABUPATEN BATANG</p>
+                        <br>
+                        <br>
+                        <br>
+                        <p><u>Dr. Bambang Supriyanto, SH.M.Hum.CGCAE</u></p>
+                        <p>Pembina Utama Muda</p>
+                        <p>NIP. 19641214 198603 1 009</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>BENDAHARA PENGELUARAN,</p>
+                        <br>
+                        <br>
+                        <br>
+                        <p><u>Isyana Noviana Fasa, A.Md.</u></p>
+                        <p>NIP. 19851128 202012 2 002</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-
 <?= $this->endSection(); ?>

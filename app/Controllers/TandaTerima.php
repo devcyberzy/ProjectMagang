@@ -108,7 +108,7 @@ class TandaTerima extends BaseController
         $data = [
             'judul' => 'TandaTerima',
             'subjudul' => 'Laporan Tanda Terima',
-            'menu' => 'TandaTerima',
+            'menu' => 'tandaterima',
             'submenu' => 'laporan-tandaterima',
         ];
         return view('tandaterima/laporan_tandaterima', $data);
@@ -142,9 +142,32 @@ class TandaTerima extends BaseController
         return view('tandaterima/laporan', $data);
     }
 
+    public function PrintTandaTerima($tanggal_awal, $tanggal_akhir)
+    {
+        $tandaterima = $this->ModelTandaTerima->LaporanPeriode($tanggal_awal, $tanggal_akhir);
+
+        $data = [
+            'judul' => 'Laporan Tanda Terima',
+            'tandaterima' => $tandaterima,
+            'page' => 'tandaterima/print_laporan'
+        ];
+
+        return view('template_laporan', $data);
+    }
+}
 
 
-    // public function PrintLaporan()
+
+
+
+
+
+
+
+
+
+
+// public function PrintLaporan()
     // {
     //     $tanggal_awal = $this->request->getPost('tanggal_awal');
     //     $tanggal_akhir = $this->request->getPost('tanggal_akhir');
@@ -176,46 +199,32 @@ class TandaTerima extends BaseController
     // }
 
 
-    public function ExportPDF()
-    {
-        $tanggal_awal = $this->request->getPost('tanggal_awal');
-        $tanggal_akhir = $this->request->getPost('tanggal_akhir');
+    // public function ExportPDF()
+    // {
+    //     $tanggal_awal = $this->request->getPost('tanggal_awal');
+    //     $tanggal_akhir = $this->request->getPost('tanggal_akhir');
 
-        $data['tandaterima'] = $this->ModelTandaTerima->LaporanPeriode($tanggal_awal, $tanggal_akhir);
-        $data['judul'] = 'DAFTAR PENERIMAAN LEMBUR BULAN FEBRUARI 2023';
+    //     $data['tandaterima'] = $this->ModelTandaTerima->LaporanPeriode($tanggal_awal, $tanggal_akhir);
+    //     $data['judul'] = 'DAFTAR PENERIMAAN LEMBUR BULAN FEBRUARI 2023';
 
-        // Load view sebagai HTML string
-        $html = view('tandaterima/laporan_pdf', $data);
+    //     // Load view sebagai HTML string
+    //     $html = view('tandaterima/laporan_pdf', $data);
 
-        // Konfigurasi Dompdf
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true);
+    //     // Konfigurasi Dompdf
+    //     $options = new Options();
+    //     $options->set('isHtml5ParserEnabled', true);
+    //     $options->set('isRemoteEnabled', true);
 
-        $dompdf = new Dompdf($options);
-        $dompdf->loadHtml($html);
+    //     $dompdf = new Dompdf($options);
+    //     $dompdf->loadHtml($html);
 
-        // Set orientasi ke landscape
-        $dompdf->setPaper('A4', 'landscape');
+    //     // Set orientasi ke landscape
+    //     $dompdf->setPaper('A4', 'landscape');
 
-        // Render PDF
-        $dompdf->render();
+    //     // Render PDF
+    //     $dompdf->render();
 
-        // Output file ke browser untuk didownload
-        $dompdf->stream("Laporan_Tanda_Terima.pdf", array("Attachment" => false));
-        exit;
-    }
-
-    public function PrintTandaTerima()
-    {
-        $tanggal_awal = $this->request->getPost('tanggal_awal');
-        $tanggal_akhir = $this->request->getPost('tanggal_akhir');
-
-        $data = [
-            'judul' => 'Laporan Tanda Terima',
-            'tandaterima' => $this->ModelTandaTerima->LaporanPeriode($tanggal_awal, $tanggal_akhir),
-            'page' => 'tandaterima/print_laporan'
-        ];
-        return view('template_laporan', $data);
-    }
-}
+    //     // Output file ke browser untuk didownload
+    //     $dompdf->stream("Laporan_Tanda_Terima.pdf", array("Attachment" => false));
+    //     exit;
+    // }

@@ -16,6 +16,13 @@
     .p1 {
         font-family: "Times New Roman", Times, serif;
     }
+
+    .tanda-tangan {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+        text-align: center;
+    }
 </style>
 
 <body>
