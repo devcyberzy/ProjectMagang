@@ -128,19 +128,38 @@ class TandaTerima extends BaseController
             return redirect()->back()->with('error', 'Tidak ada data tanda terima pada periode yang dipilih.');
         }
 
+        // Format bulan dan tahun dari input tanggal
+        $bulan_awal = date('F', strtotime($tanggal_awal));
+        $bulan_akhir = date('F', strtotime($tanggal_akhir));
+        $tahun_awal = date('Y', strtotime($tanggal_awal));
+        $tahun_akhir = date('Y', strtotime($tanggal_akhir));
+
+        // Tentukan format header bulan/tahun
+        if ($tahun_awal == $tahun_akhir) {
+            if ($bulan_awal == $bulan_akhir) {
+                $bulan_tahun = "$bulan_awal $tahun_awal";
+            } else {
+                $bulan_tahun = "$bulan_awal - $bulan_akhir $tahun_awal";
+            }
+        } else {
+            $bulan_tahun = "$bulan_awal $tahun_awal - $bulan_akhir $tahun_akhir";
+        }
+
         // Jika data tidak kosong, kirimkan data ke view
         $data = [
             'judul' => 'Tanda Terima',
             'subjudul' => 'Laporan Tanda Terima',
             'menu' => 'tandaterima',
             'submenu' => 'laporan-tandaterima',
-            'tandaterima' => $tandaterima,
+            'tandaterima' => $this->ModelTandaTerima->LaporanPeriode($tanggal_awal, $tanggal_akhir),
             'tanggal_awal' => $tanggal_awal,
             'tanggal_akhir' => $tanggal_akhir,
+            'bulan_tahun' => $bulan_tahun, // Tambahkan data ini untuk view
         ];
 
         return view('tandaterima/laporan', $data);
     }
+
 
     public function PrintTandaTerima($tanggal_awal, $tanggal_akhir)
     {
@@ -149,6 +168,8 @@ class TandaTerima extends BaseController
         $data = [
             'judul' => 'Laporan Tanda Terima',
             'tandaterima' => $tandaterima,
+            'tanggal_awal' => $tanggal_awal,  // Pastikan tanggal_awal diteruskan
+            'tanggal_akhir' => $tanggal_akhir,  // Pastikan tanggal_akhir diteruskan
             'page' => 'tandaterima/print_laporan'
         ];
 

@@ -23,6 +23,10 @@
         grid-gap: 20px;
         text-align: center;
     }
+
+    .signature-grid {
+        display: grid !important;
+    }
 </style>
 
 <body>
@@ -30,14 +34,14 @@
 
         <section class="invoice">
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="page-header">
+                    <h3 class="page-header">
                         <p><b> INSPEKTORAT DAERAH KABUPATEN BATANG
                             </b></p>
-                    </h1>
+                    </h3>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row">
                 <?php if ($page) {

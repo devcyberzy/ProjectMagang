@@ -9,6 +9,6 @@ class PersonController extends BaseController
 {
     public function index()
     {
-        //
+        return view('person_table');
     }
 }
